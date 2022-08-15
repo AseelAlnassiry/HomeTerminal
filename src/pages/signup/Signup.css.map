@@ -1,9 +1,1 @@
-{
-    "version": 3,
-    "mappings": "",
-    "sources": [
-        "Signup.scss"
-    ],
-    "names": [],
-    "file": "Signup.css"
-}
+{"version":3,"sources":["Signup.scss","Signup.css"],"names":[],"mappings":"AAAA;EACE,gBAAA;EACA,iBAAA;EACA,aAAA;EACA,sBAAA;EACA,2CAAA;EACA,sBAAA;ACCF;ADCE;EACE,kBAAA;ACCJ;ADEE;EACE,mBAAA;ACAJ","file":"Signup.css"}

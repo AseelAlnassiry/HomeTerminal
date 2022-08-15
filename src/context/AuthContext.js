@@ -1,5 +1,6 @@
 import { createContext, useEffect, useReducer } from 'react';
 import { onAuthStateChanged, getAuth } from 'firebase/auth';
+import { app } from '../firebase/config';
 
 export const AuthContext = createContext();
 
@@ -17,7 +18,7 @@ export const authReducer = (state, action) => {
 };
 
 export const AuthContextProvider = ({ children }) => {
-  const auth = getAuth();
+  const auth = getAuth(app);
 
   const [state, dispatch] = useReducer(authReducer, {
     user: null,
