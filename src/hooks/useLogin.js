@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useAuthContext } from './useAuthContext';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { updateDoc, doc } from 'firebase/firestore';
+import { db } from '../firebase/config';
 
 export const useLogin = () => {
   const [error, setError] = useState(null);
@@ -13,12 +15,18 @@ export const useLogin = () => {
     setIsPending(true);
     const auth = getAuth();
 
-    // sign user out
+    // sign user in
     try {
+      // firebase backend login
       const res = await signInWithEmailAndPassword(auth, email, password);
       console.log('signin successful');
 
-      // dispatch logout action
+      // set online status
+      const { uid } = res.user;
+      const userDocRef = doc(db, 'users', uid);
+      await updateDoc(userDocRef, { online: true });
+
+      // dispatch a login action
       dispatch({ type: 'LOGIN', payload: res.user });
 
       // update state
@@ -28,8 +36,11 @@ export const useLogin = () => {
       }
     } catch (e) {
       if (!isCancelled) {
-        console.log(e.message);
-        setError(e.message);
+        if (e.message === 'Firebase: Error (auth/wrong-password).') {
+          setError('incorrect email or password');
+        } else {
+          setError(e.message);
+        }
         setIsPending(false);
       }
     }

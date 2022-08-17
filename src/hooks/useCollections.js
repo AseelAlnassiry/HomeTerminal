@@ -1,20 +1,18 @@
 import { collection, onSnapshot, where, query, orderBy } from 'firebase/firestore';
 import { useEffect, useState, useRef } from 'react';
-import { db } from '../config/config';
+import { db } from '../firebase/config';
 
-const useCollection = (targetCollection, _queryString=null, _orderBy = null) => {
+const useCollection = (targetCollection, _queryString) => {
   const [documents, setDocuments] = useState(null);
   const [error, setError] = useState(null);
 
   const queryString = useRef(_queryString).current;
-  const orderByArg = useRef(_orderBy).current;
+  
+
   useEffect(() => {
     let ref = collection(db, targetCollection);
 
-    if (orderBy) {
-      ref = query(collection(db, targetCollection), where(...queryString), orderBy(...orderByArg));
- 
-    }
+    ref = query(collection(db, targetCollection), where(...queryString));
 
     const unsub = onSnapshot(
       ref,
@@ -35,7 +33,7 @@ const useCollection = (targetCollection, _queryString=null, _orderBy = null) => 
 
     // unsubscribe on unmount
     return () => unsub();
-  }, [targetCollection, queryString, orderByArg]);
+  }, [targetCollection, queryString]);
 
   return { documents, error };
 };

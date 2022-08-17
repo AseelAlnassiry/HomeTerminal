@@ -3,12 +3,22 @@
   margin: 60px auto;
   padding: 40px;
   border: 1px solid #ddd;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.05);
+          box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.05);
   background-color: #fff;
 }
+
 .auth-form label {
   margin-bottom: 5px;
 }
+
 .auth-form #thumbnail {
   margin-bottom: 30px;
-}/*# sourceMappingURL=Signup.css.map */
+}
+
+.auth-form span {
+  display: block;
+  color: red;
+  font-size: 0.9rem;
+}
+/*# sourceMappingURL=Signup.css.map */

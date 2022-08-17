@@ -1,1 +1,9 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"Create.css"}
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,cAAc,CAAC;EACb,UAAU,EAAE,IAAI;CACjB;;AAED,AAAA,YAAY,CAAC;EACX,SAAS,EAAE,KAAK;CACjB",
+    "sources": [
+        "Create.scss"
+    ],
+    "names": [],
+    "file": "Create.css"
+}
