@@ -4,4 +4,14 @@
 
 .create-form {
   max-width: 600px;
+  
+  label {
+    margin-bottom: 5px;
+  }
+
+  span {
+    display: block;
+    color: red;
+    font-size: 0.9rem;
+  }
 }

@@ -10,7 +10,7 @@ import Avatar from '../avatar/Avatar';
 
 const FriendsBar = () => {
   const { user } = useAuthContext();
-  const { documents, error } = useCollection('users', ['__name__', '!=', user.uid], ['online']);
+  const { documents, error } = useCollection('users', ['__name__', '!=', user.uid], ['__name__']);
 
   return (
     <div className="user-list">

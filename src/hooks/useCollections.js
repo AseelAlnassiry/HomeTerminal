@@ -2,17 +2,25 @@ import { collection, onSnapshot, where, query, orderBy } from 'firebase/firestor
 import { useEffect, useState, useRef } from 'react';
 import { db } from '../firebase/config';
 
-const useCollection = (targetCollection, _queryString) => {
+const useCollection = (targetCollection, _queryString = ['__name__', '!=', 'yeeha'], _orderByArg = ['__name__']) => {
   const [documents, setDocuments] = useState(null);
   const [error, setError] = useState(null);
 
   const queryString = useRef(_queryString).current;
-  
+  const orderByArg = useRef(_orderByArg).current;
 
   useEffect(() => {
-    let ref = collection(db, targetCollection);
-
-    ref = query(collection(db, targetCollection), where(...queryString));
+    let docRef = collection(db, targetCollection);
+    let ref = '';
+    if (queryString[0] && orderByArg[0]) {
+      ref = query(docRef, where(...queryString), orderBy(...orderByArg));
+    } else if (!queryString[0]) {
+      ref = query(docRef, orderBy(...orderByArg));
+    } else if (!orderByArg[0]) {
+      ref = query(docRef, where(...queryString));
+    } else {
+      ref = query(docRef);
+    }
 
     const unsub = onSnapshot(
       ref,
@@ -21,7 +29,7 @@ const useCollection = (targetCollection, _queryString) => {
         snapshot.docs.forEach((doc) => {
           results.push({ ...doc.data(), id: doc.id });
         });
-
+        
         setDocuments(results);
         setError(null);
       },
@@ -33,7 +41,7 @@ const useCollection = (targetCollection, _queryString) => {
 
     // unsubscribe on unmount
     return () => unsub();
-  }, [targetCollection, queryString]);
+  }, [targetCollection, queryString, orderByArg]);
 
   return { documents, error };
 };

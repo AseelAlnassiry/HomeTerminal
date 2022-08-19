@@ -1,5 +1,5 @@
 import { useReducer, useEffect, useState } from 'react';
-import { db } from '../config/config';
+import { db } from '../firebase/config';
 import { addDoc, collection, Timestamp, deleteDoc, doc } from 'firebase/firestore';
 
 let initialState = {
@@ -16,15 +16,14 @@ const firestoreReducer = (state, action) => {
     case 'ADDED_DOCUMENT':
       return { document: action.payload, isPending: false, success: true, error: null };
     case 'DELETED_DOCUMENT':
-      return { document: action.payload, isPending: false, success: true, error: null}
+      return { document: action.payload, isPending: false, success: true, error: null };
     case 'ERROR':
       return { isPending: false, document: null, success: false, error: action.payload };
     default:
       return state;
   }
 };
-
-export const useFirestore = (targetCollection) => {
+const useFirestore = (targetCollection) => {
   const [state, dispatch] = useReducer(firestoreReducer, initialState);
   const [isCancelled, setIsCancelled] = useState(false);
 
@@ -45,7 +44,6 @@ export const useFirestore = (targetCollection) => {
       const createdAt = Timestamp.fromDate(new Date());
 
       const docRef = await addDoc(collection(db, targetCollection), { ...doc, createdAt });
-      console.log(docRef);
       dispatchIfNotCancelled({ type: 'ADDED_DOCUMENT', payload: docRef });
     } catch (err) {
       dispatchIfNotCancelled({ type: 'ERROR', payload: err.message });
@@ -54,13 +52,13 @@ export const useFirestore = (targetCollection) => {
 
   // remove a document
   const removeDocument = async (id) => {
-    dispatch({type: 'IS_PENDING'})
+    dispatch({ type: 'IS_PENDING' });
     try {
-      const docRef = doc(db, targetCollection, id)
-      const deletedDocument = await deleteDoc(docRef)
-      dispatchIfNotCancelled({type: 'DELETED_DOCUMENT', payload: deletedDocument})
+      const docRef = doc(db, targetCollection, id);
+      const deletedDocument = await deleteDoc(docRef);
+      dispatchIfNotCancelled({ type: 'DELETED_DOCUMENT', payload: deletedDocument });
     } catch (err) {
-      dispatchIfNotCancelled({ type: 'ERROR', payload: 'couldn\'t delete'})
+      dispatchIfNotCancelled({ type: 'ERROR', payload: "couldn't delete" });
     }
   };
 
@@ -70,3 +68,5 @@ export const useFirestore = (targetCollection) => {
 
   return { addDocument, removeDocument, state };
 };
+
+export default useFirestore;

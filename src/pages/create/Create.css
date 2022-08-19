@@ -5,4 +5,14 @@
 .create-form {
   max-width: 600px;
 }
+
+.create-form label {
+  margin-bottom: 5px;
+}
+
+.create-form span {
+  display: block;
+  color: red;
+  font-size: 0.9rem;
+}
 /*# sourceMappingURL=Create.css.map */
