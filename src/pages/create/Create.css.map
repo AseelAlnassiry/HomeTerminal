@@ -1,9 +1,1 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,cAAc,CAAC;EACb,UAAU,EAAE,IAAI;CACjB;;AAED,AAAA,YAAY,CAAC;EACX,SAAS,EAAE,KAAK;CAWjB;;AAZD,AAGE,YAHU,CAGV,KAAK,CAAC;EACJ,aAAa,EAAE,GAAG;CACnB;;AALH,AAOE,YAPU,CAOV,IAAI,CAAC;EACH,OAAO,EAAE,KAAK;EACd,KAAK,EAAE,GAAG;EACV,SAAS,EAAE,MAAM;CAClB",
-    "sources": [
-        "Create.scss"
-    ],
-    "names": [],
-    "file": "Create.css"
-}
+{"version":3,"sources":["Create.scss","Create.css"],"names":[],"mappings":"AAAA;EACE,gBAAA;ACCF;;ADEA;EACE,gBAAA;ACCF;ADCE;EACE,kBAAA;ACCJ;ADEE;EACE,cAAA;EACA,UAAA;EACA,iBAAA;ACAJ","file":"Create.css"}

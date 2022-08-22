@@ -1,9 +1,1 @@
-{
-    "version": 3,
-    "mappings": "",
-    "sources": [
-        "Project.scss"
-    ],
-    "names": [],
-    "file": "Project.css"
-}
+{"version":3,"sources":["Project.scss","Project.css"],"names":[],"mappings":"AAAA;EACE,aAAA;EACA,8BAAA;EACA,kBAAA;EACA,cAAA;ACCF","file":"Project.css"}

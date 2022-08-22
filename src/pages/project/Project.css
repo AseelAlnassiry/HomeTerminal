@@ -1,1 +1,6 @@
-/* No CSS *//*# sourceMappingURL=Project.css.map */
+.project-details {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  align-items: start;
+  grid-gap: 60px;
+}/*# sourceMappingURL=Project.css.map */
